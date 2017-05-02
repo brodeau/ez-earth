@@ -32,7 +32,8 @@ TOCE=ORCA${TORCA}
 
 # NEMO conf label:
 OT="O${TORCA}"
-if [ ${TORCA} -eq 12 ]; then OT="O${TORCA}t"; fi
+NE="0"
+if [ ${TORCA} -eq 12 ]; then NE=""; fi
 
 # Path to proper NEMO mesh_mask.nc:
 NEMO_MESHMASK=/proj/bolinc/users/x_laubr/ORCA${TORCA}/mesh_mask.nc4
@@ -96,7 +97,7 @@ if ${l_do_areas}; then
         for ee in e1 e2; do
             ncks -A -v ${ee}${tt} ${NEMO_MESHMASK} -o e1e2.nc
         done
-        ncap2 -A -s "${OT}${tt}0=e1${tt}*e2${tt}" e1e2.nc -o orca${TORCA}_areas.nc
+        ncap2 -A -s "${OT}${tt}${NE}=e1${tt}*e2${tt}" e1e2.nc -o orca${TORCA}_areas.nc
         rm -f e1e2.nc
     done
 fi
@@ -111,8 +112,8 @@ for tt in t u v; do
         ncwa -O -a t dcoor.tmp -o dcoor.tmp
         ncatted -h -O -a "cell_methods",Vtmp,d,c, dcoor.tmp  ; # deleting attribute
         ncks -O -v Vtmp dcoor.tmp -o coor.tmp ; rm -f dcoor.tmp
-        cv="${OT}${tt}0.lat"
-        if [ "${gv}" = "glam" ]; then cv="${OT}${tt}0.lon"; fi
+        cv="${OT}${tt}${NE}.lat"
+        if [ "${gv}" = "glam" ]; then cv="${OT}${tt}${NE}.lon"; fi
         ncrename -v Vtmp,${cv} coor.tmp
         ncks -A -C -v ${cv} coor.tmp -o orca${TORCA}_grids.nc
         rm -f coor.tmp
@@ -133,8 +134,8 @@ done
 #module load ${NCO1}
 ncwa -O -a z Xmask.nc -o Xmask.nc  ; # rm degenerate z record
 for tt in t u v; do
-    ncap2 -O -s "${OT}${tt}0=(1 - ${tt}mask)" Xmask.nc -o Xmask.nc 
-    ncks  -A -v ${OT}${tt}0 Xmask.nc -o orca${TORCA}_masks.nc
+    ncap2 -O -s "${OT}${tt}${NE}=(1 - ${tt}mask)" Xmask.nc -o Xmask.nc 
+    ncks  -A -v ${OT}${tt}${NE} Xmask.nc -o orca${TORCA}_masks.nc
 done
 rm -f Xmask.nc
 echo
@@ -174,22 +175,22 @@ LIST="masks"
 if ${l_do_areas}; then LIST="areas masks"; fi
 for ft in ${LIST}; do
     for tt in t u v; do
-        ncatted -h -O -a cell_methods,${OT}${tt}0,d,c, orca${TORCA}_${ft}.nc
+        ncatted -h -O -a cell_methods,${OT}${tt}${NE},d,c, orca${TORCA}_${ft}.nc
     done
 done
 if ${l_do_areas}; then
     for tt in t u v; do
-        ncrename -v ${OT}${tt}0,${OT}${tt}0.srf orca${TORCA}_areas.nc
+        ncrename -v ${OT}${tt}${NE},${OT}${tt}${NE}.srf orca${TORCA}_areas.nc
     done
 fi
 
 for tt in t u v; do
-    ncrename -v ${OT}${tt}0,${OT}${tt}0.msk orca${TORCA}_masks.nc
+    ncrename -v ${OT}${tt}${NE},${OT}${tt}${NE}.msk orca${TORCA}_masks.nc
 done
 
 for tt in t u v; do
     for vv in lon lat; do
-        ncatted -h -O -a missing_value,${OT}${tt}0.${vv},d,c, orca${TORCA}_grids.nc
+        ncatted -h -O -a missing_value,${OT}${tt}${NE}.${vv},d,c, orca${TORCA}_grids.nc
     done
 done
 
@@ -249,21 +250,21 @@ done
 ##########
 if ${l_do_areas}; then
     for tt in t u v; do
-        ncks -A -v ${OT}${tt}0.srf orca${TORCA}_areas.nc -o ${fta}
+        ncks -A -v ${OT}${tt}${NE}.srf orca${TORCA}_areas.nc -o ${fta}
     done
     rm -f orca${TORCA}_areas.nc
 fi
 
 for tt in t u v; do
-    ncks -A -v ${OT}${tt}0.lat,${OT}${tt}0.lon orca${TORCA}_grids.nc -o ${ftg}
+    ncks -A -v ${OT}${tt}${NE}.lat,${OT}${tt}${NE}.lon orca${TORCA}_grids.nc -o ${ftg}
 done
 rm -f orca${TORCA}_grids.nc
 
 
 echo "Boo1!"
 for tt in t u v; do
-    echo "ncks -A -v ${OT}${tt}0.msk orca${TORCA}_masks.nc -o ${ftm}"
-    ncks -A -v ${OT}${tt}0.msk orca${TORCA}_masks.nc -o ${ftm}
+    echo "ncks -A -v ${OT}${tt}${NE}.msk orca${TORCA}_masks.nc -o ${ftm}"
+    ncks -A -v ${OT}${tt}${NE}.msk orca${TORCA}_masks.nc -o ${ftm}
     echo
 done
 
