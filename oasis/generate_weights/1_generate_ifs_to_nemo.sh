@@ -1,6 +1,9 @@
 #!/bin/bash
 
 NFIELDS=1 ; # grid t,u,v of NEMO...
+#LAG=2700
+LAG=30
+CPL_PERIOD=60
 
 # ORCA1-T159:
 QUEUE="snic2014-10-3" ; TIME="00:30:00"
@@ -92,11 +95,11 @@ for cg in t u v ; do
  \$END
 # -------------------------------------------------------------------------------------------------
  \$RUNTIME
-     21600
+     60
  \$END
 # -------------------------------------------------------------------------------------------------
  \$NLOGPRT
-    10
+    1
  \$END
 # -------------------------------------------------------------------------------------------------
  \$STRINGS
@@ -104,13 +107,12 @@ for cg in t u v ; do
 # =================================================================================================
 #  Field 1: model2 to model1 => IFS to NEMO for ${CNAME}, grid ${cg}
 # =================================================================================================
-   FSENDATM FRECVOCN  1 10800  3  fdatm.nc EXPOUT
-   A${CONF2} ${CONF1}${cg}${NE} LAG=2700
+   FSENDATM FRECVOCN 1 ${CPL_PERIOD} 2 fdatm.nc EXPORTED
+   A${CONF2} ${CONF1}${cg}${NE} LAG=${LAG}
    P  0  P  2
-  LOCTRANS SCRIPR CONSERV
-   AVERAGE
-   GAUSWGT D SCALAR LATITUDE 1 9 2.0
-   GLOBAL opt
+   LOCTRANS SCRIPR
+    AVERAGE
+    GAUSWGT D SCALAR LATITUDE 1 9 2.0
 #
  \$END
 EOF
@@ -145,10 +147,10 @@ EOF
     cat > name_grids.dat <<EOF
 \$grid_source_characteristics
 cl_grd_src='${CONF1}${cg}${NE}'
-\$end
-\$grid_target_characteristics
-cl_grd_tgt='A${CONF2}'
-\$end
+    \$end
+    \$grid_target_characteristics
+    cl_grd_tgt='A${CONF2}'
+    \$end
 EOF
 
     echo
