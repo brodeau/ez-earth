@@ -51,7 +51,7 @@ echo ''
 
     CC=R${CONF2}-${CONF1}
 
-    export TMP_DIR=/proj/bolinc/users/x_laubr/tmp/OASIS_WEIGHTS/${CC}_ifs_to_nemo
+    export TMP_DIR=/proj/bolinc/users/x_laubr/tmp/OASIS_WEIGHTS/${CC}_ifs_to_runoff
     mkdir -p ${TMP_DIR}
 
 # Copying nc files!
