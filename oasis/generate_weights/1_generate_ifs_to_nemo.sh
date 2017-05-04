@@ -20,7 +20,7 @@ CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
 ## - Name of the executables
 # Directories where the executables contained into "ez-earth/oasis/generate_weights/models/"
 # have been compiled (generally in the original oasis3-mct/examples of official OASIS....
-DIR_EXE=/home/x_laubr/DEV/oasis3-mct/examples/lolo
+DIR_EXE=./models
 
 exe1=model1_rcv_only
 exe2=model2_snd_only
