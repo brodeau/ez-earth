@@ -1,11 +1,9 @@
 #!/bin/bash
 
 NFIELDS=1 ; # grid t,u,v of NEMO...
-#LAG=2700
 LAG=30
 CPL_PERIOD=60
 
-# ORCA1-T159:
 QUEUE="snic2014-10-3" ; TIME="00:30:00"
 #CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
 CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0"
@@ -71,14 +69,12 @@ for cg in t ; do
     cd ${TMP_DIR}/
 
     FR1=`basename ${RST_MODEL1}` ; echo "${FR1} !"
-
     #
     if [ ! -f ./fdocn.nc ]; then
         ncks -O -v O_SSTSST ${FR1} -o fdocn.nc
         ncrename -v O_SSTSST,FSENDOCN fdocn.nc
     fi
     rm -f ${FR1}
-
 
 
     cat > namcouple <<EOF
