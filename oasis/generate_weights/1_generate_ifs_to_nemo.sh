@@ -9,17 +9,12 @@ CPL_PERIOD=60
 QUEUE="snic2014-10-3" ; TIME="00:30:00"
 CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
 
-#NBCORES=8 ; QUEUE="snic2014-10-3" ; TIME="99:00:00"
-#NBCORES=4 ; QUEUE="snic2014-10-3" ; TIME="167:59:00"
-
 #CONF1=O2t0 ; CONF2=080 ; CNAME="T159-ORCA2"
 #CONF1=O1t0 ; CONF2=128 ; CNAME="T255-ORCA1"
 #CONF1=Ot25 ; CONF2=256 ; CNAME="T511-ORCA025"
 #CONF1=O12t ; CONF2=128 ; CNAME="T255-ORCA12"
 #CONF1=O12t ; CONF2=256 ; CNAME="T511-ORCA12"
 #CONF1=O12t ; CONF2=640 ; CNAME="T1279-ORCA12"
-
-
 
 
 ## - Name of the executables
@@ -41,7 +36,6 @@ DIR_GRIDS=/proj/bolinc/users/x_laubr/brodeau_ece32_setup/oasis/${CNAME}
 GRID_AREAS=${DIR_GRIDS}/areas.nc
 GRID_GRIDS=${DIR_GRIDS}/grids.nc
 GRID_MASKS=${DIR_GRIDS}/masks.nc
-#RST_MODEL1=${DIR_GRIDS}/rst/rstos.nc
 RST_MODEL2=${DIR_GRIDS}/rst/rstas.nc
 
 echo ''
@@ -64,8 +58,6 @@ for cg in t u v ; do
 
     export TMP_DIR=/proj/bolinc/users/x_laubr/tmp/OASIS_WEIGHTS/${CC}_ifs_to_nemo
     mkdir -p ${TMP_DIR}
-
-
 
 # Copying nc files!
     for ff in ${GRID_MODEL1} ${GRID_MODEL2} ${RST_MODEL2} ${GRID_AREAS} ${GRID_GRIDS} ${GRID_MASKS} ; do
@@ -147,20 +139,18 @@ EOF
     cat > name_grids.dat <<EOF
 \$grid_source_characteristics
 cl_grd_src='${CONF1}${cg}${NE}'
-    \$end
-    \$grid_target_characteristics
-    cl_grd_tgt='A${CONF2}'
-    \$end
+\$end
+\$grid_target_characteristics
+cl_grd_tgt='A${CONF2}'
+\$end
 EOF
 
-    echo
-    echo "sbatch ./${fscript}"
-    sbatch ./${fscript}
-    echo ; sleep 3; echo
+echo
+echo "sbatch ./${fscript}"
+sbatch ./${fscript}
+echo ; sleep 3; echo
 
 done
-
-
 
 
 echo  "Check into: ${TMP_DIR}/ "
