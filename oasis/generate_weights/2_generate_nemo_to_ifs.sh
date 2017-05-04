@@ -20,7 +20,7 @@ CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0"
 ## - Name of the executables
 # Directories where the executables contained into "ez-earth/oasis/generate_weights/models/"
 # have been compiled (generally in the original oasis3-mct/examples of official OASIS....
-DIR_EXE=./models
+DIR_EXE="`pwd`/models"
 
 exe1=model1_snd_only
 exe2=model2_rcv_only
@@ -50,9 +50,7 @@ echo ''
 
 
 
-cpt=0
 for cg in t ; do
-    (cpt++)
 
     CC=${CONF1}${cg}${NE}-L${CONF2}
 

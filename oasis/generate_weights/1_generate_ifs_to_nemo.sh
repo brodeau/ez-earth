@@ -7,10 +7,10 @@ CPL_PERIOD=60
 
 # ORCA1-T159:
 QUEUE="snic2014-10-3" ; TIME="00:30:00"
-CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
+#CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
+CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0"
 
 #CONF1=O2t0 ; CONF2=080 ; CNAME="T159-ORCA2"
-#CONF1=O1t0 ; CONF2=128 ; CNAME="T255-ORCA1"
 #CONF1=Ot25 ; CONF2=256 ; CNAME="T511-ORCA025"
 #CONF1=O12t ; CONF2=128 ; CNAME="T255-ORCA12"
 #CONF1=O12t ; CONF2=256 ; CNAME="T511-ORCA12"
@@ -20,7 +20,7 @@ CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
 ## - Name of the executables
 # Directories where the executables contained into "ez-earth/oasis/generate_weights/models/"
 # have been compiled (generally in the original oasis3-mct/examples of official OASIS....
-DIR_EXE=./models
+DIR_EXE="`pwd`/models"
 
 exe1=model1_rcv_only
 exe2=model2_snd_only
@@ -50,9 +50,7 @@ echo ''
 
 
 
-cpt=0
 for cg in t u v ; do
-    (cpt++)
 
     CC=A${CONF2}-${CONF1}${cg}${NE}
 
@@ -99,7 +97,7 @@ for cg in t u v ; do
 # =================================================================================================
 #  Field 1: model2 to model1 => IFS to NEMO for ${CNAME}, grid ${cg}
 # =================================================================================================
-   FSENDATM FRECVOCN 1 ${CPL_PERIOD} 2 fdatm.nc EXPORTED
+   FSENDATM FRECVOCN 1 ${CPL_PERIOD} 2  fdatm.nc EXPORTED
    A${CONF2} ${CONF1}${cg}${NE} LAG=${LAG}
    P  0  P  2
    LOCTRANS SCRIPR
