@@ -4,9 +4,10 @@ NFIELDS=1 ; # grid t,u,v of NEMO...
 LAG=30
 CPL_PERIOD=60
 
-QUEUE="snic2014-10-3" ; TIME="00:30:00"
-#CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0"
-CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0"
+QUEUE="snic2014-10-3"
+CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0" ; TIME="00:30:00"
+#CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0" ; TIME="00:30:00"
+CONF1=O12  ; CONF2=640 ; CNAME="T1279-ORCA12" ; NE="" ; TIME="167:59:00"
 
 #CONF1=O2t0 ; CONF2=080 ; CNAME="T159-ORCA2"
 #CONF1=Ot25 ; CONF2=256 ; CNAME="T511-ORCA025"
@@ -127,6 +128,8 @@ ulimit -s unlimited
 echo "mpirun -np ${nproc_exe1} ./${exe1} : -np ${nproc_exe2} ./${exe2}"
 #
 mpirun -np ${nproc_exe1} ./${exe1} : -np ${nproc_exe2} ./${exe2}
+#
+mv -f rmp_*.nc ../
 #
 EOF
 

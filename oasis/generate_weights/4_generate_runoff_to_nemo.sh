@@ -127,6 +127,8 @@ echo "mpirun -np ${nproc_exe1} ./${exe1} : -np ${nproc_exe2} ./${exe2}"
 #
 mpirun -np ${nproc_exe1} ./${exe1} : -np ${nproc_exe2} ./${exe2}
 #
+mv -f rmp_*.nc ../                                                                                   
+#
 EOF
 
     chmod +x ${fscript}
