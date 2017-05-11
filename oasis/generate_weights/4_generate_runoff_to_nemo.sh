@@ -26,7 +26,8 @@ exe2=model2_snd_only
 nproc_exe1=${NFIELDS}
 nproc_exe2=${NFIELDS}
 
-NBCORES=$((${nproc_exe1}+${nproc_exe2}))
+#NBCORES=$((${nproc_exe1}+${nproc_exe2}))
+NBCORES=16
 
 
 DIR_GRIDS=/proj/bolinc/users/x_laubr/brodeau_ece32_setup/oasis/${CNAME}
