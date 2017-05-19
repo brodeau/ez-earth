@@ -44,11 +44,6 @@ NEMO_OUT=/scratch/Earth/lbrodeau/ORCA12-T1279/${expname}/nemo
 
 
 
-nccopy -k 4 -d 9 ${expname}_1d_${year}_CURL.nc ${expname}_1d_${year}_CURL.nc4
-
-exit 0
-
-
 
 for jm in 1 2 3 4 5 6 7 8 9 10 11 12; do
 
