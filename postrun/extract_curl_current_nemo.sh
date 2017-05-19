@@ -40,7 +40,13 @@ rm -f curl.nc
 
 NEMO_OUT=/scratch/Earth/lbrodeau/ORCA12-T1279/${expname}/nemo
 
-yece=$((${year}-${ref_year}+1))
+#yece=$((${year}-${ref_year}+1))
+
+
+
+nccopy -k 4 -d 9 ${expname}_1d_${year}_CURL.nc ${expname}_1d_${year}_CURL.nc4
+
+exit 0
 
 
 
@@ -54,7 +60,7 @@ for jm in 1 2 3 4 5 6 7 8 9 10 11 12; do
     fv=`\ls ${NEMO_OUT}/${subdir}/${expname}_1d_${year}${cm}01_${year}${cm}??_grid_V.nc4`
 
     ca=`basename ${fu}`
-    fout=`echo ${ca} | sed -e s/"grid_U"/"CURL"/g`
+    fout=`echo ${ca} | sed -e s/"grid_U"/"CURL"/g -e s/".nc4"/".nc"/g`
 
     echo ${fout}
 
@@ -67,6 +73,8 @@ for jm in 1 2 3 4 5 6 7 8 9 10 11 12; do
 
 done
 
-ncrcat -O 
+ncrcat -O ${expname}_1d_${year}*_CURL.nc -o ${expname}_1d_${year}_CURL.nc
+
+nccopy -k 4 -d 9 ${expname}_1d_${year}_CURL.nc ${expname}_1d_${year}_CURL.nc4
 
 exit 0
