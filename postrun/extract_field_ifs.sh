@@ -12,7 +12,7 @@
 #######
 #SBATCH -n 3
 #SBATCH -J EX-IFS
-#SBATCH -t 05:50:00
+#SBATCH -t 08:50:00
 #SBATCH -o out_extract_ifs_%J.out
 #SBATCH -e err_extract_ifs_%J.err
 ########
@@ -26,11 +26,12 @@ expname="CHR0"
 l_do_qsum=false
 
 #VVAR="SSTK,T2M,D2M,U10M,V10M,MSL"
-VVAR="T2M"
+VVAR="U10M,V10M"
+#VVAR="T2M"
 #VFLX="SSHF,SLHF,SSR,STR,EWSS,NSSS"
 #VFLX="SSHF,SLHF,SSR"
-#VFLX="EWSS,NSSS"
-VFLX=""
+VFLX="EWSS,NSSS"
+#VFLX=""
 
 IFS_OUT=/scratch/Earth/lbrodeau/ORCA12-T1279/${expname}/ifs
 
