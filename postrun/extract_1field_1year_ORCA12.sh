@@ -24,8 +24,18 @@ cat > ${cs} <<EOF
 #BSUB -oo out_ExtrO12_%J.out
 #BSUB -eo err_ExtrO12_%J.err
 ########
+#
+#######
+#SBATCH -w gustafson
+#SBATCH -n 6
+#SBATCH -J ExtrO12
+#SBATCH -t 05:50:00
+#SBATCH -o out_extract_curl_nemo_%J.out
+#SBATCH -e err_extract_curl_nemo%J.err
+########
 
-echo ; module load NCO/4.6.1 ; echo
+
+#echo ; module load NCO/4.6.1 ; echo
 
 fr="${VAR}_${EXP}_${YEAR}"
 
@@ -83,4 +93,9 @@ rm -f \${fr}_???.tmp mean_\${fr}_???.tmp
 EOF
 
 chmod +x ${cs}
-bsub < ${cs}
+
+if [ `hostname` = "gustafson" ]; then
+    sbatch ${cs}
+else
+    bsub < ${cs}
+fi
