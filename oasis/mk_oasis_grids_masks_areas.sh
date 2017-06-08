@@ -19,9 +19,9 @@ PATH_EC_OASIS=/proj/bolinc/users/x_laubr/brodeau_ece32_setup/oasis
 
 # Config:
 #RATM=159 ; GATM=080 ; TORCA=1 ;  l_do_areas=true
-RATM=1279 ; GATM=640 ; TORCA=12 ;  l_do_areas=true
+#RATM=1279 ; GATM=640 ; TORCA=12 ;  l_do_areas=true
+RATM=255 ; GATM=128 ; TORCA=1 ;  l_do_areas=true
 
-#RATM=255 ; GATM=128 ; TORCA=1
 #RATM=511 ; GATM=256 ; TORCA=025
 
 
@@ -49,6 +49,15 @@ if [ "${RATM}" = "159" ]; then
     A_RATM="./back/areas.nc"
     G_RATM="./back/grids.nc"
     M_RATM="./back/masks.nc"
+    # Rnf 512x256:
+    A_RNFF="${PATH_EC_OASIS}/T255-ORCA1/areas.nc"
+    G_RNFF="${PATH_EC_OASIS}/T255-ORCA1/grids.nc"
+    M_RNFF="${PATH_EC_OASIS}/T255-ORCA1/masks.nc"
+
+elif [ "${RATM}" = "255" ]; then
+    A_RATM="${PATH_EC_OASIS}/T255-ORCA1/areas.nc"
+    G_RATM="${PATH_EC_OASIS}/T255-ORCA1/grids.nc"
+    M_RATM="${PATH_EC_OASIS}/T255-ORCA1/masks.nc"
     # Rnf 512x256:
     A_RNFF="${PATH_EC_OASIS}/T255-ORCA1/areas.nc"
     G_RNFF="${PATH_EC_OASIS}/T255-ORCA1/grids.nc"
