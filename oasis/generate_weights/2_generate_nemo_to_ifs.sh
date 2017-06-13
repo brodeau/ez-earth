@@ -9,8 +9,8 @@ QUEUE="snic2016-34-21"
 #CONF1=O1  ; CONF2=080 ; CNAME="T159-ORCA1" ; NE="0" ; TIME="00:30:00"
 #CONF1=O1  ; CONF2=128 ; CNAME="T255-ORCA1" ; NE="0" ; TIME="00:30:00"
 
-#CONF1=O12  ; CONF2=640 ; CNAME="T1279-ORCA12" ; NE="" ; TIME="167:59:00"
-CONF1=O12  ; CONF2=128 ; CNAME="T255-ORCA12" ; NE="" ; TIME="167:59:00"
+CONF1=O12  ; CONF2=640 ; CNAME="T1279-ORCA12" ; NE="" ; TIME="167:59:00"; NBCORES=10
+#CONF1=O12  ; CONF2=128 ; CNAME="T255-ORCA12" ; NE="" ; TIME="167:59:00"; NBCORES=6
 
 #CONF1=O2t0 ; CONF2=080 ; CNAME="T159-ORCA2"
 #CONF1=Ot25 ; CONF2=256 ; CNAME="T511-ORCA025"
@@ -30,7 +30,7 @@ exe2=model2_rcv_only
 nproc_exe1=${NFIELDS}
 nproc_exe2=${NFIELDS}
 
-NBCORES=$((${nproc_exe1}+${nproc_exe2}))
+#NBCORES=$((${nproc_exe1}+${nproc_exe2}))
 
 
 DIR_GRIDS=/proj/bolinc/users/x_laubr/brodeau_ece32_setup/oasis/${CNAME}

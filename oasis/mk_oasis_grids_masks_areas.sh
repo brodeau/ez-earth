@@ -20,7 +20,7 @@ PATH_EC_OASIS=/proj/bolinc/users/x_laubr/brodeau_ece32_setup/oasis
 # Config:
 #RATM=159 ; GATM=080 ; TORCA=1 ;  l_do_areas=true
 #RATM=1279 ; GATM=640 ; TORCA=12 ;  l_do_areas=true
-RATM=255 ; GATM=128 ; TORCA=1 ;  l_do_areas=true
+RATM=255 ; GATM=128 ; TORCA=12 ;  l_do_areas=true
 
 #RATM=511 ; GATM=256 ; TORCA=025
 
