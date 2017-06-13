@@ -1,17 +1,20 @@
 #!/bin/bash
 
-EXP="CHR0"
-VAR="sosstsst"
+#EXP="CHR0"
 YEAR="1990"
+
+#VAR="sosstsst" ; GRID="grid_T"
+#VAR="ssu" ; GRID="grid_U"
+
 
 ROOT_NEMO_DATA="../nemo"
 
-if [ "$2" = "" ]; then
-    echo "USAGE: `basename ${0}` <NAME EXP> <VAR to extract>"; exit
+if [ "$3" = "" ]; then
+    echo "USAGE: `basename ${0}` <NAME EXP> <VAR to extract> <grid>"; exit
 fi
 EXP="$1"
 VAR="$2"
-
+GRID="$3"
 
 cs="extract.job"
 
@@ -43,7 +46,7 @@ fr="${VAR}_${EXP}_${YEAR}"
 
 for cm in "001" "003" "005" "007" "009" "011"; do
     echo
-    cf_t=\`find ${ROOT_NEMO_DATA}/\${cm} -name ${EXP}_1d_${YEAR}*_grid_T.nc*\`
+    cf_t=\`find ${ROOT_NEMO_DATA}/\${cm} -name ${EXP}_1d_${YEAR}*_${GRID}.nc*\`
     echo "ncks -O -h -v ${VAR} \${cf_t} -o \${fr}_\${cm}.tmp &"
           ncks -O -h -v ${VAR} \${cf_t} -o \${fr}_\${cm}.tmp &
     echo
@@ -53,7 +56,7 @@ wait
 
 for cm in "002" "004" "006" "008" "010" "012"; do
     echo
-    cf_t=\`find ${ROOT_NEMO_DATA}/\${cm} -name ${EXP}_1d_${YEAR}*_grid_T.nc*\`
+    cf_t=\`find ${ROOT_NEMO_DATA}/\${cm} -name ${EXP}_1d_${YEAR}*_${GRID}.nc*\`
     echo "ncks -O -h -v ${VAR} \${cf_t} -o \${fr}_\${cm}.tmp &"
           ncks -O -h -v ${VAR} \${cf_t} -o \${fr}_\${cm}.tmp &
     echo
